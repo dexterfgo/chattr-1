@@ -1,0 +1,9 @@
+---
+:pid_file: tmp/orator.pid
+:log_file: log/orator.log
+:server_options:
+  :host: 0.0.0.0
+  :port: 8080
+:orators_path: app/orators/*
+:require:
+  - config/orator/active_record.rb

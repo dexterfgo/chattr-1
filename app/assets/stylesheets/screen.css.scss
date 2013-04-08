@@ -1,0 +1,16 @@
+// Imports -------------------------------------------------------------------
+
+@import "base";
+
+/* Layout ------------------------------------------------------------------*/
+
+.container {
+  @include container;
+}
+
+#grid-background {
+	@include container;
+  @include susy-grid-background;
+	position: absolute;
+	height: 98%;
+}
