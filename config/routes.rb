@@ -4,7 +4,11 @@ Chattr::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  get 'home/test'
+  get 'home/chat'
+  root :to => "home#chat"
+
+  resource :user
+  get 'user/token'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

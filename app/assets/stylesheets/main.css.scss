@@ -1,0 +1,56 @@
+//= require flat-ui
+
+$mono-font: Consolas, Monaco, monospace;
+
+body {
+  padding-top: 40px;
+}
+
+body a { text-decoration: none; }
+
+#chat {
+  list-style-type: none;
+  overflow-y: scroll;
+
+  li {
+    div.body {
+      position: relative;
+      background: #ECF0F1;
+      min-height: 57px;
+    }
+    div.body:after {
+      right: 100%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    div.body:after {
+      border-color: rgba(236, 240, 241, 0);
+      border-right-color: #ECF0F1;
+      border-width: 10px;
+      top: 50%;
+      margin-top: -10px;
+    }
+
+    &.system {
+      span.sender { font-family: $mono-font; color: #E74C3C; }
+    }
+  }
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+#chat div.body {
+
+  c, code {
+    font-family: $mono-font;
+  }
+}
+
+#chat-input {
+  font-family: $mono-font;
+}

@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require orator
+//= require flat-ui
 //= require_tree .

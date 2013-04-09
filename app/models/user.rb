@@ -6,8 +6,10 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible  :name, :email, :password, :password_confirmation, :remember_me
   #attr_accessible :email, :name
+
+  before_save :reset_authentication_token
 
   has_many :messages, :inverse_of => :user
   has_many :channels, :through => :messages, :inverse_of => :users
