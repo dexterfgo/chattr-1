@@ -11,12 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130408164143) do
+ActiveRecord::Schema.define(:version => 20130409124546) do
+
+  create_table "admins_channels", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "channel_id"
+  end
 
   create_table "channels", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "owner_id"
   end
 
   create_table "messages", :force => true do |t|
@@ -41,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20130408164143) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "authentication_token"
+    t.string   "uuid"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

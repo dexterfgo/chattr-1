@@ -4,7 +4,7 @@ class SocketOrator < ApplicationOrator
 
   on :open
   def open(_)
-    self.user = {}
+    self.user = { :channels => [] }
     user[:authenticated] = false
   end
 
@@ -12,7 +12,15 @@ class SocketOrator < ApplicationOrator
     on :error
     def error(data)
       pp data
-      pp data.backtrace[0..5]
+      pp data.backtrace
+    end
+
+    on :missing
+    def missing(data)
+      pp data
+
+      send message('socket.error', message: "No event with that name.",
+        data: data)
     end
   end
 
