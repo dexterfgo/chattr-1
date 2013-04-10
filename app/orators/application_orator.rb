@@ -1,7 +1,7 @@
 class ApplicationOrator < Orator::Base
 
   before do |json|
-    unless ['user.auth', 'socket.open', 'socket.close',
+    next if ['user.auth', 'socket.open', 'socket.close',
       'socket.error'].include?(full_event)
 
       if (!self[:user]) || user[:authenticated] < (Time.now - 600)

@@ -16,7 +16,7 @@ class UserOrator < ApplicationOrator
     user[:record] = user_record
   end
 
-  on 'channels.join', :join_channel
+  on 'channels.join' => :join_channel
   def join_channel(json)
     lookup = Channel.where(name: json["channel"]).first
 
@@ -29,7 +29,7 @@ class UserOrator < ApplicationOrator
     end
   end
 
-  on 'channels.leave', :leave_channel
+  on 'channels.leave' => :leave_channel
   def leave_channel(json)
     if user[:channels].select! { |ch|
       ch.name == json["channel"]
@@ -40,7 +40,7 @@ class UserOrator < ApplicationOrator
     end
   end
 
-  on 'channels.list', :list_channels
+  on 'channels.list' => :list_channels
   def list_channels(_)
     send message('user.channels.list', channels: user.channels)
   end

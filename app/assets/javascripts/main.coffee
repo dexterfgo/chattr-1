@@ -54,5 +54,5 @@ $ ->
   force_size()
   $(window).resize(force_size)
 
-  $(window).hashchange ()->
-    location.hash # => different now
+  #$(window).hashchange ()->
+  #  location.hash # => different now

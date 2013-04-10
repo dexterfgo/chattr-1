@@ -22,7 +22,7 @@ class ChannelOrator < ApplicationOrator
     send message('channel.list', list: channels)
   end
 
-  on 'users.list', :users_list
+  on 'users.list' => :users_list
   def users_list(json)
     in_channel = clients.select do |c|
       c.context.user[:channels].map(&:name).include?(json["channel"])
