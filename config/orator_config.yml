@@ -4,8 +4,8 @@
 :server_options:
   :host: 0.0.0.0
   :port: 8080
-:orators: 
+:orators:
   - app/orators/application_orator.rb
   - app/orators/*
 :require:
-  - config/orator/active_record.rb
+  - config/orator/router.rb

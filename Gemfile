@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 
@@ -29,6 +29,7 @@ end
 gem 'orator', :path => "../orator"
 gem 'flatui-rails'
 gem 'jquery-rails'
+gem 'paperclip'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

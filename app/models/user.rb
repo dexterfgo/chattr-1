@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation,
+    :remember_me, :avatar
 
   validates :name, :length => { :in => 3..20 }, :presence => true,
     :uniqueness => true
@@ -20,12 +21,18 @@ class User < ActiveRecord::Base
   has_many :message_channels, :class_name => "Channel", :through => :messages,
     :inverse_of => :users
   has_and_belongs_to_many :channels, :join_table => "admins_channels"
+  has_attached_file :avatar,
+    :styles => { :default => "x64" },
+    :default_url => "/assets/system.png",
+    :path => ":rails_root/public/avatars/:hash.:extension",
+    :hash_secret => "345olnsid0349jipsa0fdfai8o43qb15ionkfdlsi3o4n5iolsasdfasd8943n",
+    :url => "/avatars/:hash.:extension"
 
   def for_message
     {
       :name => name,
       :uuid => uuid,
-      :avatar => ""
+      :avatar => avatar.url(:default)
     }
   end
 

@@ -1,21 +1,17 @@
 class SocketOrator < ApplicationOrator
 
-  orator_name 'socket'
-
-  on :open
   def open(_)
     self.user = { :channels => [] }
-    user[:authenticated] = false
+    user[:authenticated] = Time.new 0
+    send message('user.auth', {})
   end
 
   if Orator.debug
-    on :error
     def error(data)
       pp data
       pp data.backtrace
     end
 
-    on :missing
     def missing(data)
       pp data
 

@@ -4,11 +4,11 @@ class ApplicationOrator < Orator::Base
     next if ['user.auth', 'socket.open', 'socket.close',
       'socket.error'].include?(full_event)
 
-      if (!self[:user]) || user[:authenticated] < (Time.now - 600)
-        send message('user.auth_required', original_message: json)
-        prevent_event
-      end
-
+    # If the user object doesn't exist or their authentication is up, force
+    # them to authenticate.
+    if user[:authenticated] < (Time.now - 600)
+      send message('user.auth', original_message: json)
+      prevent_event
     end
   end
 
@@ -25,8 +25,16 @@ class ApplicationOrator < Orator::Base
     end)
 
     clients.select(&block).map do |c|
-      c.context.send({ "_broadcast" => true }.merge(message))
+      c.context.send({ "_broadcast" => true, "_time" => Time.now.to_f }.merge(message))
     end
+  end
+
+  # This responds to the client with the current event as the event.  It sends
+  # the data as well.
+  #
+  # @param data [Hash] the message to send.
+  def respond(data)
+    send message(full_event, data)
   end
 
 end
